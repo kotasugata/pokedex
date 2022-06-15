@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import Image from "next/image";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -8,9 +8,9 @@ import Link from "next/link";
 type Props = any;
 
 export const PokemonHeader: React.FC<Props> = (props) => {
-  const { pokemon, id } = props;
-  const backId = id - 1 > 0 ? id - 1 : undefined;
-  const fowardId = id + 1 < 152 ? id + 1 : undefined;
+  const { pokemon } = props;
+  const backId = pokemon.id - 1 > 0 ? pokemon.id - 1 : undefined;
+  const fowardId = pokemon.id + 1 < 152 ? pokemon.id + 1 : undefined;
   const imageId = pokemon.id.toString().padStart(3, "0");
   return (
     <Box
@@ -19,9 +19,13 @@ export const PokemonHeader: React.FC<Props> = (props) => {
       justifyContent="center"
       sx={{ my: 8 }}
     >
-      <Link href={`/pokemon/${backId}`}>
-        <ArrowBackIosNewIcon />
-      </Link>
+      {backId && (
+        <Link href={`/pokemon/${backId}`}>
+          <Button>
+            <ArrowBackIosNewIcon />
+          </Button>
+        </Link>
+      )}
       <Box sx={{ mx: 5 }}>
         <Image
           src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/thumbnails-compressed/${imageId}.png`}
@@ -47,9 +51,13 @@ export const PokemonHeader: React.FC<Props> = (props) => {
           </Box>
         </CardContent>
       </Card>
-      <Link href={`/pokemon/${fowardId}`}>
-        <ArrowForwardIosIcon />
-      </Link>
+      {fowardId && (
+        <Link href={`/pokemon/${fowardId}`}>
+          <Button>
+            <ArrowForwardIosIcon />
+          </Button>
+        </Link>
+      )}
     </Box>
   );
 };

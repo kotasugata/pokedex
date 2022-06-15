@@ -6,7 +6,6 @@ type Props = any;
 
 const Home: NextPage<Props> = (props) => {
   const { data } = props;
-  console.log(data);
   return (
     <>
       <Typography variant="h4">ポケモン一覧</Typography>
@@ -16,7 +15,7 @@ const Home: NextPage<Props> = (props) => {
 };
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const res = await fetch(
-    "https://pokeapi.co/api/v2/pokemon?offset=0&limit=151"
+    "https://pokeapi.co/api/v2/pokemon?offset=0&limit=387"
   );
   const data = await res.json();
   return {

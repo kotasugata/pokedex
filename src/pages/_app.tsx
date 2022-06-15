@@ -35,6 +35,7 @@ function MyApp(props: MyAppProps) {
             <DefaultSeo {...SEO} />
             <CssBaseline />
             <Component {...pageProps} />
+            <ReactQueryDevtools initialIsOpen={false} />
           </ThemeProvider>
         </RecoilRoot>
       </QueryClientProvider>

@@ -1,12 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import { ContesntsCard } from "@/components/molecules/ContentsCard";
+import { useQuery } from "react-query";
 
 type Props = { pokemonListApi: { name: string; url: string }[] };
 
 export const PokemonList: React.FC<Props> = (props) => {
   const { pokemonListApi } = props;
   const [pokemonList, setPokemonList] = useState<{}[]>([]);
+
   const fetchPokemon = useCallback(() => {
     const promises = [];
     for (let i = 1; i < pokemonListApi.length; i++) {
@@ -17,9 +19,10 @@ export const PokemonList: React.FC<Props> = (props) => {
       setPokemonList(results);
     });
   }, [pokemonListApi.length]);
+
   useEffect(() => {
     fetchPokemon();
-  }, [fetchPokemon]);
+  }, []);
 
   return (
     <Box sx={{ my: 6, mx: 6 }}>
